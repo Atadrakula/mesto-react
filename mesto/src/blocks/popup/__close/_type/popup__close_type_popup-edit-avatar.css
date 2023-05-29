@@ -1,10 +1,10 @@
-.popup__close_type_avatar {
+.popup__close_type_popup-edit-avatar {
   top: -40px;
   right: -40px;
 }
 
 @media (max-width: 600px) {
-  .popup__close_type_avatar {
+  .popup__close_type_popup-edit-avatar {
     top: -20px;
     right: -20px;
   }

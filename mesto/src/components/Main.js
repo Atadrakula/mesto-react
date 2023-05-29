@@ -1,24 +1,5 @@
-import {
-	editAvatarPopup,
-	editProfilePopup,
-	addPlacePopup
-} from '../utils/constants.js'
-
-function Main() {
-
-	// const [isOpened, setIsOpened] = React.useState(false);
-	
-	// function handleEditAvatarCLick() {
-	// 	editAvatarPopup.classList.add('popup_visible');
-	// }
-
-	function handleEditProfileClick() {
-		editProfilePopup.classList.add('popup_visible');
-	}
-
-	function handleAddPlaceClick() {
-		addPlacePopup.classList.add('popup_visible');
-	}
+function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+  // const [isOpened, setIsOpened] = React.useState(false);
 
   return (
     <main className="content">
@@ -29,8 +10,11 @@ function Main() {
               src="<%=require('./images/avatar.png')%>"
               alt="Аватар"
               className="profile__avatar"
-            />					
-            <div className="profile__avatar-overlay"></div>
+            />
+            <div
+              className="profile__avatar-overlay"
+              onClick={onEditAvatar}
+            ></div>
           </div>
           <div className="profile__data">
             <h1 className="profile__name">#</h1>
@@ -38,7 +22,7 @@ function Main() {
               className="profile__button-edit button-clickable cursor-pointer"
               aria-label="Редактировать"
               type="button"
-							onClick={handleEditProfileClick}
+              onClick={onEditProfile}
             ></button>
             <p className="profile__activity"></p>
           </div>
@@ -47,7 +31,7 @@ function Main() {
           className="profile__button-add button-clickable cursor-pointer"
           aria-label="Добавить"
           type="button"
-					onClick={handleAddPlaceClick}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className="places">
