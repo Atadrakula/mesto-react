@@ -1,4 +1,25 @@
+import {
+	editAvatarPopup,
+	editProfilePopup,
+	addPlacePopup
+} from '../utils/constants.js'
+
 function Main() {
+
+	// const [isOpened, setIsOpened] = React.useState(false);
+	
+	// function handleEditAvatarCLick() {
+	// 	editAvatarPopup.classList.add('popup_visible');
+	// }
+
+	function handleEditProfileClick() {
+		editProfilePopup.classList.add('popup_visible');
+	}
+
+	function handleAddPlaceClick() {
+		addPlacePopup.classList.add('popup_visible');
+	}
+
   return (
     <main className="content">
       <section className="profile">
@@ -8,7 +29,7 @@ function Main() {
               src="<%=require('./images/avatar.png')%>"
               alt="Аватар"
               className="profile__avatar"
-            />
+            />					
             <div className="profile__avatar-overlay"></div>
           </div>
           <div className="profile__data">
@@ -17,6 +38,7 @@ function Main() {
               className="profile__button-edit button-clickable cursor-pointer"
               aria-label="Редактировать"
               type="button"
+							onClick={handleEditProfileClick}
             ></button>
             <p className="profile__activity"></p>
           </div>
@@ -25,6 +47,7 @@ function Main() {
           className="profile__button-add button-clickable cursor-pointer"
           aria-label="Добавить"
           type="button"
+					onClick={handleAddPlaceClick}
         ></button>
       </section>
       <section className="places">
