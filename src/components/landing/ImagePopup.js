@@ -1,4 +1,4 @@
-function imagePopup({ card, onClose }) {
+function ImagePopup({ card, onClose }) {
   const visibleClass = `popup image-popup ${card ? "popup_visible" : ""}`;
 
   return (
@@ -17,4 +17,4 @@ function imagePopup({ card, onClose }) {
   );
 }
 
-export default imagePopup;
+export default ImagePopup;

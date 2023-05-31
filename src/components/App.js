@@ -1,8 +1,8 @@
-import Footer from "./Footer.js";
-import Header from "./Header.js";
-import Main from "./Main.js";
-import PopupWithForm from "./PopupWithForm.js";
-import ImagePopup from "./ImagePopup.js";
+import Footer from "./landing/Footer.js";
+import Header from "./landing/Header.js";
+import Main from "./landing/Main.js";
+import PopupWithForm from "./landing/PopupWithForm.js";
+import ImagePopup from "./landing/ImagePopup.js";
 import React, { useState, useEffect, useCallback } from "react";
 
 function App() {
