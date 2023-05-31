@@ -1,8 +1,8 @@
 function PopupWithForm({isOpen, onClose, name, title, children}) {
-  const popupClassName = `popup ${isOpen ? 'popup_visible' : '' }`;
+  const popupVisibleClass = `popup ${isOpen ? 'popup_visible' : '' }`;
 	
 	return (
-    <div className={popupClassName} id={name}>
+    <div className={popupVisibleClass} id={name}>
       <div className="popup__container">
         <button
           aria-label="Закрыть"

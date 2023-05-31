@@ -1,75 +1,88 @@
-import Footer from "./Footer.js";
-import Header from "./Header.js";
-import Main from "./Main.js";
-import PopupWithForm from "./PopupWithForm.js";
-import ImagePopup from "./ImagePopup.js";
-import React, { useState, useEffect, useCallback } from 'react';
-
+import Footer from "./landing/Footer.js";
+import Header from "./landing/Header.js";
+import Main from "./landing/Main.js";
+import PopupWithForm from "./landing/PopupWithForm.js";
+import ImagePopup from "./landing/ImagePopup.js";
+import React, { useState, useEffect, useCallback } from "react";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isSelectedCard, setIsSelectedCard] = useState("");
 
-	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-	const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-	const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  function handleCardClick(card) {
+    setIsSelectedCard(card);
+  }
 
-	function openEditProfilePopup() {
-		setIsEditProfilePopupOpen(true);
-	}
+  function openEditProfilePopup() {
+    setIsEditProfilePopupOpen(true);
+  }
 
-	function openAddPlacePopup() {
-		setIsAddPlacePopupOpen(true);
-	}
+  function openAddPlacePopup() {
+    setIsAddPlacePopupOpen(true);
+  }
 
-	function openEditAvatarPopupOpen() {
-		setIsEditAvatarPopupOpen(true);
-	}
+  function openEditAvatarPopupOpen() {
+    setIsEditAvatarPopupOpen(true);
+  }
 
-	const closeAllPopups = useCallback(() => {
+  const closeAllPopups = useCallback(() => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-}, []);
+    setIsSelectedCard(false);
+  }, []);
 
-	useEffect(() => {
-		function handleEscClose(e) {
-			if (e.key === 'Escape') {
-				closeAllPopups();
-			}
-		}
+  useEffect(() => {
+    function handleEscClose(e) {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    }
 
-		function handleClickClose(e) {
-			if (e.target.classList.contains('popup')) {
-				closeAllPopups();
-			}
-		}
+    function handleClickClose(e) {
+      if (e.target.classList.contains("popup")) {
+        closeAllPopups();
+      }
+    }
 
-		if (isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen) {
-			document.addEventListener('keydown', handleEscClose);
-      document.addEventListener('click', handleClickClose);
+    if (
+      isEditProfilePopupOpen ||
+      isAddPlacePopupOpen ||
+      isEditAvatarPopupOpen ||
+      isSelectedCard
+    ) {
+      document.addEventListener("keydown", handleEscClose);
+      document.addEventListener("click", handleClickClose);
 
-
-			return () => {
-				document.removeEventListener('keydown', handleEscClose);
-        document.removeEventListener('click', handleClickClose);
+      return () => {
+        document.removeEventListener("keydown", handleEscClose);
+        document.removeEventListener("click", handleClickClose);
       };
-			}
-		}, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen, closeAllPopups])
-
-
+    }
+  }, [
+    isEditProfilePopupOpen,
+    isAddPlacePopupOpen,
+    isEditAvatarPopupOpen,
+    isSelectedCard,
+    closeAllPopups,
+  ]);
 
   return (
     <div className="body">
       <div className="page">
         <Header />
-        <Main 
-					onEditProfile={openEditProfilePopup}
-					onAddPlace={openAddPlacePopup}
-					onEditAvatar={openEditAvatarPopupOpen}
-				/>
+        <Main
+          onEditProfile={openEditProfilePopup}
+          onAddPlace={openAddPlacePopup}
+          onEditAvatar={openEditAvatarPopupOpen}
+          onCardClick={handleCardClick}
+        />
         <Footer />
-        <PopupWithForm					
-					isOpen={isEditProfilePopupOpen}
-					onClose={closeAllPopups}
+        <PopupWithForm
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
           name="popup-edit"
           title="Редактировать профиль"
           children={
@@ -105,8 +118,8 @@ function App() {
           }
         />
         <PopupWithForm
-					isOpen={isAddPlacePopupOpen}
-					onClose={closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           name="popup-add"
           title="Новое место"
           children={
@@ -141,8 +154,8 @@ function App() {
           }
         />
         <PopupWithForm
-					isOpen={isEditAvatarPopupOpen}
-					onClose={closeAllPopups}
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
           name="popup-edit-avatar"
           title="Обновить аватар"
           children={
@@ -177,7 +190,7 @@ function App() {
             </>
           }
         />
-				<ImagePopup />
+        <ImagePopup card={isSelectedCard} onClose={closeAllPopups} />
       </div>
     </div>
   );
