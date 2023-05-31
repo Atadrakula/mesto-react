@@ -1,30 +1,51 @@
+import { useEffect, useState } from "react";
+import api from "../utils/Api";
+
 function Main({onEditProfile, onAddPlace, onEditAvatar}) {
   // const [isOpened, setIsOpened] = React.useState(false);
+	const [isUserName, setIsUserName] = useState('');
+	const [isUserDescription, setIsUserDescription] = useState('');
+	const [isUserAvatar, setIsUserAvatar] = useState('');
+
+	useEffect(() => {
+		const getUserInfo = async () => {
+			try {
+				const dataProfile = await api.pullProfileInfo();
+				setIsUserName(dataProfile.name);
+				setIsUserDescription(dataProfile.about);
+				setIsUserAvatar(dataProfile.avatar);
+			} catch (error) {
+				console.error(`Ошибка при загрузке данных пользователя: ${error}`);
+			}
+		};
+		
+		getUserInfo();
+	}, []);
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__info">
-          <div className="profile__avatar-container cursor-pointer">
-            <img
-              src="<%=require('./images/avatar.png')%>"
-              alt="Аватар"
+          <div 
+						className="profile__avatar-container cursor-pointer">
+            <div
+							style={{ backgroundImage: `url(${isUserAvatar})` }}            
               className="profile__avatar"
-            />
+            ></div>
             <div
               className="profile__avatar-overlay"
               onClick={onEditAvatar}
             ></div>
           </div>
           <div className="profile__data">
-            <h1 className="profile__name">#</h1>
+            <h1 className="profile__name">{isUserName}</h1>
             <button
               className="profile__button-edit button-clickable cursor-pointer"
               aria-label="Редактировать"
               type="button"
               onClick={onEditProfile}
             ></button>
-            <p className="profile__activity"></p>
+            <p className="profile__activity">{isUserDescription}</p>
           </div>
         </div>
         <button
