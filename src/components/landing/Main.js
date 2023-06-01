@@ -6,7 +6,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [isUserName, setUserName] = useState("");
   const [isUserDescription, setUserDescription] = useState("");
   const [UserAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([""]);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -35,11 +35,11 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <div
               style={{ backgroundImage: `url(${UserAvatar})` }}
               className="profile__avatar"
-            ></div>
+            />
             <div
               className="profile__avatar-overlay"
               onClick={onEditAvatar}
-            ></div>
+            />
           </div>
           <div className="profile__data">
             <h1 className="profile__name">{isUserName}</h1>
@@ -48,7 +48,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
               aria-label="Редактировать"
               type="button"
               onClick={onEditProfile}
-            ></button>
+            />
             <p className="profile__activity">{isUserDescription}</p>
           </div>
         </div>
@@ -57,12 +57,12 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
           aria-label="Добавить"
           type="button"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <section className="places">
         <ul className="places__cards">
           {cards.map((card) => (
-            <Card card={card} onCardClick={onCardClick} />
+            <Card card={card} onCardClick={onCardClick} key={card._id}/>
           ))}
         </ul>
       </section>

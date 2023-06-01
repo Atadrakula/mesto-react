@@ -9,7 +9,7 @@ function PopupWithForm({isOpen, onClose, name, title, children}) {
           className={`popup__close popup__close_type_${name} button-clickable cursor-pointer`}
           type="button"
 					onClick={onClose}
-        ></button>
+        />
         <h2 className="popup__name">{title}</h2>
         <form
           name={`${name}-form`}

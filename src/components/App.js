@@ -9,7 +9,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isSelectedCard, setIsSelectedCard] = useState("");
+  const [isSelectedCard, setIsSelectedCard] = useState(false);
 
   function handleCardClick(card) {
     setIsSelectedCard(card);
@@ -96,7 +96,7 @@ function App() {
                 maxlength="40"
                 required
               />
-              <span className="popup__input-text-error popup__input-text-error_type_username"></span>
+              <span className="popup__input-text-error popup__input-text-error_type_username"/>
               <input
                 name="useractivity"
                 type="text"
@@ -106,7 +106,7 @@ function App() {
                 maxlength="200"
                 required
               />
-              <span className="popup__input-text-error popup__input-text-error_type_useractivity"></span>
+              <span className="popup__input-text-error popup__input-text-error_type_useractivity"/>
               <button
                 id="button-submit-popup-edit"
                 type="submit"
@@ -141,7 +141,7 @@ function App() {
                 className="popup__input popup__input_type_card-link"
                 required
               />
-              <span className="popup__input-text-error popup__input-text-error_type_link"></span>
+              <span className="popup__input-text-error popup__input-text-error_type_link"/>
               <button
                 disabled
                 id="button-submit-popup-add"
@@ -167,7 +167,7 @@ function App() {
                 className="popup__input popup__input_type_card-link"
                 required
               />
-              <span class="popup__input-text-error popup__input-text-error_type_avatar"></span>
+              <span class="popup__input-text-error popup__input-text-error_type_avatar"/>
               <button
                 disabled
                 id="button-submit-popup-avatar"
