@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/mesto-react/static/css/main.35840d4a.css",
+    "main.js": "/mesto-react/static/js/main.8b74310a.js",
+    "static/js/787.7e45d085.chunk.js": "/mesto-react/static/js/787.7e45d085.chunk.js",
+    "static/media/Inter-500.woff": "/mesto-react/static/media/Inter-500.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-900.woff": "/mesto-react/static/media/Inter-900.c6938660eec019fefd68.woff",
+    "static/media/Inter-400.woff": "/mesto-react/static/media/Inter-400.8c206db99195777c6769.woff",
+    "static/media/Inter-500.woff2": "/mesto-react/static/media/Inter-500.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-900.woff2": "/mesto-react/static/media/Inter-900.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-400.woff2": "/mesto-react/static/media/Inter-400.c8ba52b05a9ef10f4758.woff2",
+    "static/media/Logo.svg": "/mesto-react/static/media/Logo.bbe2a6eafac19c3d031c272c424875ca.svg",
+    "static/media/Heart.svg": "/mesto-react/static/media/Heart.e3b9ba5840ebe97bc077.svg",
+    "index.html": "/mesto-react/index.html",
+    "static/media/Trash.svg": "/mesto-react/static/media/Trash.e3c42771bff3aaa52f76.svg",
+    "static/media/Heart_black.svg": "/mesto-react/static/media/Heart_black.35948469632d0421d697.svg",
+    "static/media/Button-vector-edit.svg": "/mesto-react/static/media/Button-vector-edit.6c7bf05444b9793fdf6e.svg",
+    "static/media/Vector_avatar.svg": "/mesto-react/static/media/Vector_avatar.ae1a976ddb506239e9f0.svg",
+    "static/media/Close-Icon.svg": "/mesto-react/static/media/Close-Icon.039f1f5203f653b4bacd.svg",
+    "static/media/Add-Button-vector.svg": "/mesto-react/static/media/Add-Button-vector.bed8c136e13907f5eefb.svg",
+    "main.35840d4a.css.map": "/mesto-react/static/css/main.35840d4a.css.map",
+    "main.8b74310a.js.map": "/mesto-react/static/js/main.8b74310a.js.map",
+    "787.7e45d085.chunk.js.map": "/mesto-react/static/js/787.7e45d085.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35840d4a.css",
+    "static/js/main.8b74310a.js"
+  ]
+}
