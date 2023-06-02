@@ -10,8 +10,12 @@ function ImagePopup({ card, onClose }) {
           type="button"
           onClick={onClose}
         />
-        <img src={card.link} alt={card.name} className="image-popup__img" />
-        <h3 className="image-popup__title">{card.name}</h3>
+        {card?.link && (
+          <>
+            <img src={card.link} alt={card.name} className="image-popup__img" />
+            <h3 className="image-popup__title">{card.name}</h3>
+          </>
+        )}
       </div>
     </div>
   );

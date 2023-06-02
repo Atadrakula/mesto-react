@@ -2,12 +2,12 @@ import logo from '../../images/Logo.svg';
 
 function Header() {
   return (
-    <header class="header">
+    <header className="header">
       <a href="#logo">
         <img
           src={logo}
           alt="Логотип"
-          class="logo button-clickable"
+          className="logo button-clickable"
 					id='logo'
         />
       </a>

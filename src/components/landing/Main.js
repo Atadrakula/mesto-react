@@ -8,6 +8,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [UserAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {

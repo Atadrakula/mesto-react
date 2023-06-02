@@ -9,7 +9,9 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isSelectedCard, setIsSelectedCard] = useState(false);
+  const [isSelectedCard, setIsSelectedCard] = useState(null);
+
+
 
   function handleCardClick(card) {
     setIsSelectedCard(card);
@@ -31,7 +33,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsSelectedCard(false);
+    setIsSelectedCard(null);
   }, []);
 
   useEffect(() => {
@@ -92,8 +94,8 @@ function App() {
                 type="text"
                 placeholder="Имя"
                 className="popup__input popup__input_type_username"
-                minlength="2"
-                maxlength="40"
+                minLength="2"
+                maxLength="40"
                 required
               />
               <span className="popup__input-text-error popup__input-text-error_type_username"/>
@@ -102,8 +104,8 @@ function App() {
                 type="text"
                 placeholder="О себе"
                 className="popup__input popup__input_type_useractivity"
-                minlength="2"
-                maxlength="200"
+                minLength="2"
+                maxLength="200"
                 required
               />
               <span className="popup__input-text-error popup__input-text-error_type_useractivity"/>
@@ -129,11 +131,11 @@ function App() {
                 type="text"
                 placeholder="Название"
                 className="popup__input popup__input_type_card-name"
-                minlength="2"
-                maxlength="30"
+                minLength="2"
+                maxLength="30"
                 required
               />
-              <span class="popup__input-text-error popup__input-text-error_type_name"></span>
+              <span className="popup__input-text-error popup__input-text-error_type_name"></span>
               <input
                 name="link"
                 type="url"
@@ -167,7 +169,7 @@ function App() {
                 className="popup__input popup__input_type_card-link"
                 required
               />
-              <span class="popup__input-text-error popup__input-text-error_type_avatar"/>
+              <span className="popup__input-text-error popup__input-text-error_type_avatar"/>
               <button
                 disabled
                 id="button-submit-popup-avatar"
@@ -184,7 +186,7 @@ function App() {
           title="Вы уверены?"
           children={
             <>
-              <button type="button" class="popup__submit">
+              <button type="button" className="popup__submit">
                 Да
               </button>
             </>
