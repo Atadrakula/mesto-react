@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import api from "../../utils/Api";
 import Card from "./Card";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [isUserName, setUserName] = useState("");
-  const [isUserDescription, setUserDescription] = useState("");
-  const [UserAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
+  const { name, about, avatar } = currentUser || {};
 
 
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const [dataProfile, dataCards] = await Promise.all([
-          api.pullProfileInfo(),
-          api.pullCardInfo(),
-        ]);
-        setUserName(dataProfile.name);
-        setUserDescription(dataProfile.about);
-        setUserAvatar(dataProfile.avatar);
+        const dataCards = await api.pullCardInfo();
         setCards(dataCards);
       } catch (error) {
         console.error(`Ошибка при загрузке данных пользователя: ${error}`);
@@ -26,7 +20,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
     };
 
     getUserInfo();
-  }, []);
+  });
 
   return (
     <main className="content">
@@ -34,7 +28,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
         <div className="profile__info">
           <div className="profile__avatar-container cursor-pointer">
             <div
-              style={{ backgroundImage: `url(${UserAvatar})` }}
+              style={{ backgroundImage: `url(${avatar})` }}
               className="profile__avatar"
             />
             <div
@@ -43,14 +37,14 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             />
           </div>
           <div className="profile__data">
-            <h1 className="profile__name">{isUserName}</h1>
+            <h1 className="profile__name">{name}</h1>
             <button
               className="profile__button-edit button-clickable cursor-pointer"
               aria-label="Редактировать"
               type="button"
               onClick={onEditProfile}
             />
-            <p className="profile__activity">{isUserDescription}</p>
+            <p className="profile__activity">{about}</p>
           </div>
         </div>
         <button

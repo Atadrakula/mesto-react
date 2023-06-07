@@ -1,15 +1,26 @@
-function Card({ card, onCardClick, key }) {
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
+function Card({ card, onCardClick }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwn = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const cardLikedClassName = (`cards__heart cursor-pointer ${isLiked && 'cards__heart_active'}`);
+
   function handleClick() {
     onCardClick(card);
   }
 
   return (
-    <li className="cards" key={key}>
-      <button
-        className="cards__trash cursor-pointer button-clickable"
-        aria-label="Мусорка"
-        type="button"
-      />
+    <li className="cards">
+      {isOwn && (
+        <button
+          className="cards__trash cursor-pointer button-clickable"
+          aria-label="Мусорка"
+          type="button"
+        />
+      )}
       <div
         style={{ backgroundImage: `url(${card.link})` }}
         className="cards__img cursor-pointer"
@@ -19,7 +30,7 @@ function Card({ card, onCardClick, key }) {
         <h2 className="cards__name">{card.name}</h2>
         <div className="cards__heart-box">
           <button
-            className="cards__heart cursor-pointer"
+            className={cardLikedClassName}
             aria-label="Сердце"
             type="button"
           />
