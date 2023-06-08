@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import api from "../../utils/Api";
 import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [cards, setCards] = useState([]);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, setCards, onCardDelete }) {
+
   const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser || {};
 
@@ -20,7 +20,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
     };
 
     getUserInfo();
-  });
+  }, [setCards]);
 
   return (
     <main className="content">
@@ -57,7 +57,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       <section className="places">
         <ul className="places__cards">
           {cards.map((card) => (
-            <Card card={card} onCardClick={onCardClick} key={card._id}/>
+            <Card card={card} onCardClick={onCardClick} key={card._id} onCardLike={onCardLike} onCardDelete={onCardDelete}/>
           ))}
         </ul>
       </section>

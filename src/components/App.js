@@ -14,8 +14,9 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isSelectedCard, setSelectedCard] = useState(null);
-
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -29,6 +30,30 @@ function App() {
     }
     fetchUserInfo();
   }, []);
+
+  async function handleCardLike(targetCard) {
+
+    const isLiked = targetCard.likes.some(i => i._id === currentUser._id);
+
+    try {
+      const checkedCard = await api.toggleLikeCard(targetCard._id, !isLiked);
+      const newCards = cards.map(card => card._id === checkedCard._id ? checkedCard : card);
+      setCards(newCards);
+    } catch (error) {
+      console.error("Ошибка при лайке/дизлайке карточки:", error);
+    }
+  }
+
+  async function handleCardDelete(targetCard) {
+    try {
+      await api.deleteCard(targetCard._id);
+      const newCards = cards.filter(card => card._id !== targetCard._id);
+      setCards(newCards);
+    } catch (error) {
+      console.error("Ошибка при удалении карточки:", error);
+    }
+  }
+
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -98,6 +123,10 @@ function App() {
             onAddPlace={openAddPlacePopup}
             onEditAvatar={openEditAvatarPopupOpen}
             onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            cards={cards}
+            setCards={setCards}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
           <PopupWithForm

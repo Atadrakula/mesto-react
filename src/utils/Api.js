@@ -61,6 +61,14 @@ class Api {
     });
   }
 
+  toggleLikeCard(cardId, isLiked) {
+    if (isLiked) {
+      return this.likeCard(cardId);
+    } else {
+      return this.dislikeCard(cardId);
+    }
+  }
+
   pushAvatar(data) {
     return this._request(`/users/me/avatar`, {
       method: 'PATCH',
