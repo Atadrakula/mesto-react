@@ -1,26 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import api from "../../utils/Api";
 import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, setCards, onCardDelete }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, onCardDelete }) {
 
   const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser || {};
 
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        const dataCards = await api.pullCardInfo();
-        setCards(dataCards);
-      } catch (error) {
-        console.error(`Ошибка при загрузке данных пользователя: ${error}`);
-      }
-    };
-
-    getUserInfo();
-  }, [setCards]);
 
   return (
     <main className="content">

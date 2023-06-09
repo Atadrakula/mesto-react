@@ -10,6 +10,7 @@ import {
 } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./landing/EditProfilePopup.js";
 import EditAvatarPopup from './landing/EditAvatarPopup.js';
+import AddPlacePopup from "./landing/AddPlacePopup.js";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -19,6 +20,19 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const dataCards = await api.pullCardInfo();
+        setCards(dataCards);
+      } catch (error) {
+        console.error(`Ошибка при загрузке данных пользователя: ${error}`);
+      }
+    };
+
+    getUserInfo();
+  }, [setCards]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -73,6 +87,16 @@ function App() {
       closeAllPopups();
     } catch (error) {
       console.error("Ошибка при обновлении данных пользователя:", error);
+    }
+  }
+
+  async function handleAddPlaceSubmit(dataCard) {
+    try {
+      const pushCardInfo = await api.pushCardInfo(dataCard);
+      setCards([pushCardInfo, ...cards]);
+      closeAllPopups();
+    } catch (error) {
+      console.error(`Ошибка при загрузке данных новой карточки: ${error}`);
     }
   }
 
@@ -151,42 +175,7 @@ function App() {
           />
           <Footer />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <PopupWithForm
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            name="popup-add"
-            title="Новое место"
-            children={
-              <>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="Название"
-                  className="popup__input popup__input_type_card-name"
-                  minLength="2"
-                  maxLength="30"
-                  required
-                />
-                <span className="popup__input-text-error popup__input-text-error_type_name"></span>
-                <input
-                  name="link"
-                  type="url"
-                  placeholder="Ссылка на картинку"
-                  className="popup__input popup__input_type_card-link"
-                  required
-                />
-                <span className="popup__input-text-error popup__input-text-error_type_link" />
-                <button
-                  disabled
-                  id="button-submit-popup-add"
-                  type="submit"
-                  className="popup__submit popup__submit_inactive"
-                >
-                  Создать
-                </button>
-              </>
-            }
-          />
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <PopupWithForm
             name="popup-delete"
