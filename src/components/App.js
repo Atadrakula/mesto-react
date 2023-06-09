@@ -9,6 +9,7 @@ import {
   CurrentUserContext
 } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./landing/EditProfilePopup.js";
+import EditAvatarPopup from './landing/EditAvatarPopup.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -59,6 +60,16 @@ function App() {
     try {
       const updateData = await api.patchProfileInfo(dataUser);
       setCurrentUser(updateData);
+      closeAllPopups();
+    } catch (error) {
+      console.error("Ошибка при обновлении данных пользователя:", error);
+    }
+  }
+
+  async function handleUpdateAvatar(avatarLink) {
+    try {
+      const updateAvatar = await api.pushAvatar(avatarLink);
+      setCurrentUser(updateAvatar);
       closeAllPopups();
     } catch (error) {
       console.error("Ошибка при обновлении данных пользователя:", error);
@@ -176,32 +187,7 @@ function App() {
               </>
             }
           />
-          <PopupWithForm
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            name="popup-edit-avatar"
-            title="Обновить аватар"
-            children={
-              <>
-                <input
-                  name="avatar"
-                  type="url"
-                  placeholder="Ссылка на картинку"
-                  className="popup__input popup__input_type_card-link"
-                  required
-                />
-                <span className="popup__input-text-error popup__input-text-error_type_avatar" />
-                <button
-                  disabled
-                  id="button-submit-popup-avatar"
-                  type="submit"
-                  className="popup__submit popup__submit_inactive"
-                >
-                  Сохранить
-                </button>
-              </>
-            }
-          />
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <PopupWithForm
             name="popup-delete"
             title="Вы уверены?"
