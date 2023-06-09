@@ -1,4 +1,4 @@
-function PopupWithForm({isOpen, onClose, name, title, children}) {
+function PopupWithForm({isOpen, onClose, name, title, children, onSubmit}) {
   const popupVisibleClass = `popup ${isOpen ? 'popup_visible' : '' }`;
 
 	return (
@@ -15,6 +15,7 @@ function PopupWithForm({isOpen, onClose, name, title, children}) {
           name={`${name}-form`}
           action="#"
           className="popup__form"
+          onSubmit={onSubmit}
         >
           {children}
         </form>

@@ -8,6 +8,7 @@ import api from "../utils/Api.js";
 import {
   CurrentUserContext
 } from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./landing/EditProfilePopup.js";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -54,6 +55,15 @@ function App() {
     }
   }
 
+  async function handleUpdateUser(dataUser) {
+    try {
+      const updateData = await api.patchProfileInfo(dataUser);
+      setCurrentUser(updateData);
+      closeAllPopups();
+    } catch (error) {
+      console.error("Ошибка при обновлении данных пользователя:", error);
+    }
+  }
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -129,43 +139,7 @@ function App() {
             onCardDelete={handleCardDelete}
           />
           <Footer />
-          <PopupWithForm
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            name="popup-edit"
-            title="Редактировать профиль"
-            children={
-              <>
-                <input
-                  name="username"
-                  type="text"
-                  placeholder="Имя"
-                  className="popup__input popup__input_type_username"
-                  minLength="2"
-                  maxLength="40"
-                  required
-                />
-                <span className="popup__input-text-error popup__input-text-error_type_username" />
-                <input
-                  name="useractivity"
-                  type="text"
-                  placeholder="О себе"
-                  className="popup__input popup__input_type_useractivity"
-                  minLength="2"
-                  maxLength="200"
-                  required
-                />
-                <span className="popup__input-text-error popup__input-text-error_type_useractivity" />
-                <button
-                  id="button-submit-popup-edit"
-                  type="submit"
-                  className="popup__submit"
-                >
-                  Сохранить
-                </button>
-              </>
-            }
-          />
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <PopupWithForm
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
