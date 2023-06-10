@@ -10,14 +10,12 @@ import {
 import EditProfilePopup from "./landing/EditProfilePopup.js";
 import EditAvatarPopup from './landing/EditAvatarPopup.js';
 import AddPlacePopup from "./landing/AddPlacePopup.js";
-import ProveDeleteCardPopup from "./landing/ProveDeleteCardPopup.js";
 
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isProveDeleteCardPopupOpen, setIsProveDeleteCardPopupOpen] = useState(false);
   const [isSelectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [loadingText, setLoadingText] = useState(null);
@@ -64,7 +62,6 @@ function App() {
   }
 
   async function handleCardDelete(targetCard) {
-    openProveDeleteCardPopup();
     try {
       await api.deleteCard(targetCard._id);
       const newCards = cards.filter(card => card._id !== targetCard._id);
@@ -129,15 +126,10 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  function openProveDeleteCardPopup() {
-    setIsProveDeleteCardPopupOpen(true);
-  }
-
   const closeAllPopups = useCallback(() => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsProveDeleteCardPopupOpen(false);
     setSelectedCard(null);
   }, []);
 
@@ -158,8 +150,7 @@ function App() {
       isEditProfilePopupOpen ||
       isAddPlacePopupOpen ||
       isEditAvatarPopupOpen ||
-      isSelectedCard ||
-      isProveDeleteCardPopupOpen
+      isSelectedCard
     ) {
       document.addEventListener("keydown", handleEscClose);
       document.addEventListener("click", handleClickClose);
@@ -174,7 +165,6 @@ function App() {
     isAddPlacePopupOpen,
     isEditAvatarPopupOpen,
     isSelectedCard,
-    isProveDeleteCardPopupOpen,
     closeAllPopups,
   ]);
 
@@ -197,7 +187,6 @@ function App() {
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} loadingText={loadingText} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} loadingText={loadingText} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} loadingText={loadingText} />
-          <ProveDeleteCardPopup isOpen={isProveDeleteCardPopupOpen} onClose={closeAllPopups} />
           <ImagePopup card={isSelectedCard} onClose={closeAllPopups} />
         </div>
       </div>

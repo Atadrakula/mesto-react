@@ -1,6 +1,8 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
+// - доделаю позже, реализация подтверждения
+
 function ProveDeleteCardPopup({ isOpen, onClose }) {
   return (
     <PopupWithForm
