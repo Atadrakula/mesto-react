@@ -7,8 +7,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
   const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser || {};
 
-
-
   return (
     <main className="content">
       <section className="profile">

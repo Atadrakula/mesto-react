@@ -1,7 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
 import React, { useRef } from "react";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, loadingText }) {
 
   const avatarRef = useRef();
 
@@ -31,12 +31,13 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           />
           <span className="popup__input-text-error popup__input-text-error_type_avatar" />
           <button
-            // disabled
+            // disabled - использовать при разработки Валидатора
             id="button-submit-popup-avatar"
             type="submit"
-            className="popup__submit popup__submit_inactive"
+            className="popup__submit"
+            //className="popup__submit popup__submit_inactive" - использовать при разработки Валидатора
           >
-            Сохранить
+            {loadingText || 'Сохранить'}
           </button>
         </>
       }

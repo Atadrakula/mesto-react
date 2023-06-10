@@ -2,7 +2,7 @@ import PopupWithForm from "./PopupWithForm";
 import React, { useState } from "react";
 
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, loadingText }) {
 
   const [valueNameCard, setValueNameCard] = useState('');
   const [valueLink, setValueLink] = useState('');
@@ -56,12 +56,13 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           />
           <span className="popup__input-text-error popup__input-text-error_type_link" />
           <button
-            // disabled
+            // disabled - использовать при разработки Валидатора
             id="button-submit-popup-add"
             type="submit"
-            className="popup__submit popup__submit_inactive"
+            className="popup__submit"
+            // className="popup__submit popup__submit_inactive" - использовать при разработки Валидатора
           >
-            Создать
+            {loadingText || 'Создать'}
           </button>
         </>
       }
