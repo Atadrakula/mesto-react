@@ -9,9 +9,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, loadingText }) {
   const { name, about } = currentUser || {};
 
   useEffect(() => {
-    setValueName(name);
-    setValueActivity(about);
-  }, [name, about]);
+    if(isOpen) {
+      setValueName(name);
+      setValueActivity(about);
+    }
+  }, [name, about, isOpen]);
 
   function handleChangeName(e) {
     setValueName(e.target.value);
@@ -46,10 +48,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, loadingText }) {
             className="popup__input popup__input_type_username"
             minLength="2"
             maxLength="40"
-            value={valueName}
+            value={valueName || ''}
             onChange={handleChangeName}
             required
-
           />
           <span className="popup__input-text-error popup__input-text-error_type_username" />
           <input
@@ -59,10 +60,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, loadingText }) {
             className="popup__input popup__input_type_useractivity"
             minLength="2"
             maxLength="200"
-            value={valueActivity}
+            value={valueActivity || ''}
             onChange={handleChangeActivity}
             required
-
           />
           <span className="popup__input-text-error popup__input-text-error_type_useractivity" />
           <button

@@ -1,15 +1,20 @@
 import PopupWithForm from "./PopupWithForm";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, loadingText }) {
-
   const avatarRef = useRef();
+
+  useEffect(() => {
+    if (isOpen) {
+      avatarRef.current.value = "";
+    }
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
       avatar: avatarRef.current.value,
-    })
+    });
   }
 
   return (
@@ -37,12 +42,12 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, loadingText }) {
             className="popup__submit"
             //className="popup__submit popup__submit_inactive" - использовать при разработки Валидатора
           >
-            {loadingText || 'Сохранить'}
+            {loadingText || "Сохранить"}
           </button>
         </>
       }
     />
-  )
+  );
 }
 
 export default EditAvatarPopup;
